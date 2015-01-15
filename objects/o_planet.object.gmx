@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Initialize
-name = "E5A62" + string(round(random(8)) + 1);
+name = "E" + string(round(random(999)) + 1);
+color = choose(c_red, c_green, c_blue);
 z = 0;
 size = 180;
 dir = 0;
@@ -85,7 +86,9 @@ d3d_transform_stack_push();
 
 // drawing
 d3d_set_lighting(false);
+draw_set_color(color);
 d3d_draw_ellipsoid(x - size, y - size, z - size, x + size, y + size, z + size, background_get_texture(b_terra), 1, 1, 24);
+draw_set_color(c_white);
 d3d_set_lighting(true);
 
 d3d_transform_stack_pop();

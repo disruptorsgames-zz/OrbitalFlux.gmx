@@ -51,12 +51,34 @@ global.typing = false;
           <argument>
             <kind>1</kind>
             <string>/// OSD
+d3d_set_lighting(false);
+
+var lines = floor(view_hview[0] / 16) - 6;
+for (var i = 0; i &lt; ds_list_size(global.console); i++)
+{
+    var con = ds_map_create();
+    ds_map_read(con, global.console[| i]);
+    var text = ds_map_find_first(con);
+    for (var j = 0; j &lt; ds_map_size(con); j++)
+    {
+        color = ds_map_find_value(con, text);
+        var yy = 64 + (i mod lines * 16);
+        draw_text_colour(14, yy, i, c_yellow, c_yellow, c_yellow, c_yellow, 0.75);
+        draw_text_colour(32, yy, text, color, color, color, color, 0.75);
+        text = ds_map_find_next(con, text);
+    }
+    ds_map_destroy(con);
+}
+draw_text_colour(16, 50, string(lines - ds_list_size(global.console)), c_orange, c_orange, c_orange, c_orange, 0.75);
+
 if (global.typing)
 {
     input = ternary(global.typing, keyboard_string + "|", keyboard_string);
     draw_text_color(16, view_hview[0] - 32, input, c_white, c_white, c_white, c_white, 0.75);
     //draw_text_color(16, view_hview[0] - 16, parse(keyboard_string), c_orange, c_orange, c_orange, c_orange, 0.5);
 }
+
+d3d_set_lighting(true);
 </string>
           </argument>
         </arguments>
