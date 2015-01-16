@@ -28,6 +28,10 @@
             <string>/// Initialize
 global.console = ds_list_create();
 global.typing = false;
+
+// run in release
+//gml_release_mode(!debug_mode);
+//randomize();
 </string>
           </argument>
         </arguments>

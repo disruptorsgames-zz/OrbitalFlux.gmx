@@ -30,8 +30,8 @@
 // basic info
 hp = 100;
 max_hp = 100;
-name = "P4" + string(round(random(999)) + 1);
-color = make_color_rgb(random(255), random(255), random(255));
+name = "Player";
+color = choose(c_red, c_green, c_blue);
 
 // location &amp; attributes
 z = 0;
@@ -39,65 +39,6 @@ size = 180;
 dir = 0;
 orbit_speed = 8 / 60 /*/ 60*/;
 orbit_radius = 4800;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Orbit
-dir += orbit_speed;
-x = o_sun.x - lengthdir_x(orbit_radius, dir);
-z = lengthdir_y(orbit_radius, dir);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// D3D
-d3d_transform_stack_push();
-
-// drawing
-//d3d_set_lighting(false);
-draw_set_color(color);
-d3d_draw_ellipsoid(x - size, y - size, z - size, x + size, y + size, z + size, background_get_texture(b_terra), 1, 1, 24);
-draw_set_color(c_white);
-//d3d_set_lighting(true);
-
-d3d_transform_stack_pop();
 </string>
           </argument>
         </arguments>

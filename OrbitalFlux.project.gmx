@@ -19,6 +19,7 @@
   <objects name="objects">
     <object>objects\o_camera</object>
     <object>objects\o_planet</object>
+    <object>objects\o_player</object>
     <object>objects\o_sun</object>
     <object>objects\o_world</object>
   </objects>
