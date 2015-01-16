@@ -28,8 +28,6 @@
             <string>/// Initialize
 pan = 0;
 tilt = 30;
-//distance = 60;
-//max_distance = 270;
 zoffset = 14;// 8
 xoffset = 0;
 yoffset = 0;
@@ -51,7 +49,9 @@ window_mouse_set(view_wview[0] / 2, view_hview[0] / 2);
 
 // targeting
 target = ternary(instance_exists(o_planet), o_planet, noone);
-distance = target.size * 4 + 60;
+min_distance = target.size * 4 + 60;
+max_distance = min_distance * 2;
+distance = min_distance;
 </string>
           </argument>
         </arguments>
@@ -76,7 +76,7 @@ distance = target.size * 4 + 60;
 d3d_start();
 d3d_set_lighting(true);
 d3d_light_define_ambient(c_white);
-d3d_set_fog(true, c_white, lod, lod * 2);
+d3d_set_fog(true, c_gray, lod, lod * 2);
 d3d_set_culling(true);
 d3d_set_hidden(true);
 d3d_set_shading(true);
@@ -134,17 +134,67 @@ if (instance_exists(target))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Mouse Snapping &amp;amp; Rotation
+            <string>/// Mouse Look
 if (mlook)
 {
     pan += (window_mouse_get_x() - window_get_width() / 2) * rotspeed_x;
     global.camera_d = pan;
     tilt += (window_mouse_get_y() - window_get_height() / 2) * rotspeed_y;
     tilt = max(0, min(89, tilt));
-    window_mouse_set(window_get_width() / 2, window_get_height() / 2);
+    window_mouse_set(view_wview[0] / 2, view_hview[0] / 2);
 }
 
 window_set_cursor(ternary(mlook, cr_none, cr_default));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="61">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Zoom Out
+if (distance &lt; max_distance)
+    distance += 10 * 4 + 60;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="60">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Zoom In
+if (distance &gt; min_distance)
+    distance -= 10 * 4 + 60;
 </string>
           </argument>
         </arguments>
@@ -171,7 +221,7 @@ window_set_cursor(ternary(mlook, cr_none, cr_default));
 d3d_set_lighting(false);
 
 // drawing
-draw_healthbar(16, 16, 116, 20, (target.hp / target.max_hp) * 100, c_black, c_maroon, c_green, 1, false, true);
+draw_healthbar(16, 16, 256, 24, (target.hp / target.max_hp) * 100, c_black, c_maroon, c_green, 1, false, true);
 
 d3d_set_lighting(true);
 </string>
@@ -206,6 +256,31 @@ global.camera_d = pan;
 r = view_wview[0] / view_hview[0];
 
 d3d_set_projection_ext(global.camera_x, global.camera_y, global.camera_z, x, y, z, 0, 0, 1, fov, r, 1, lod);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="18">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Toggle Mouselook
+mlook = !mlook;
+cout(ternary(mlook, "Mouselook Enabled", "Mouselook Disabled"), c_ltgray);
 </string>
           </argument>
         </arguments>
