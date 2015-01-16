@@ -8,6 +8,7 @@
   <sprites name="sprites"/>
   <backgrounds name="background">
     <background>background\b_terra</background>
+    <background>background\b_sun</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -18,6 +19,7 @@
   <objects name="objects">
     <object>objects\o_camera</object>
     <object>objects\o_planet</object>
+    <object>objects\o_sun</object>
     <object>objects\o_world</object>
   </objects>
   <rooms name="rooms">

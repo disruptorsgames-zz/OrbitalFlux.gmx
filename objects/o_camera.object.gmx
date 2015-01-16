@@ -76,7 +76,7 @@ distance = target.size * 4 + 60;
 d3d_start();
 d3d_set_lighting(true);
 d3d_light_define_ambient(c_white);
-d3d_set_fog(true, c_black, lod, lod);
+d3d_set_fog(true, c_white, lod, lod * 2);
 d3d_set_culling(true);
 d3d_set_hidden(true);
 d3d_set_shading(true);
@@ -145,6 +145,35 @@ if (mlook)
 }
 
 window_set_cursor(ternary(mlook, cr_none, cr_default));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// HUD
+d3d_set_lighting(false);
+
+// drawing
+draw_healthbar(16, 16, 116, 20, (target.hp / target.max_hp) * 100, c_black, c_maroon, c_green, 1, false, true);
+
+d3d_set_lighting(true);
 </string>
           </argument>
         </arguments>
