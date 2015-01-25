@@ -13,6 +13,7 @@
   <code>/// Initialize
 instance_create(room_width / 2, room_height / 2, o_sun);
 instance_create(0, 0, o_planet);
+instance_create(0, 0, o_player);
 
 instance_create(0, 0, o_world);
 instance_create(0, 0, o_camera);</code>

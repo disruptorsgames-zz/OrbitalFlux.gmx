@@ -48,7 +48,7 @@ rotspeed_y = 0.95;
 window_mouse_set(view_wview[0] / 2, view_hview[0] / 2);
 
 // targeting
-target = ternary(instance_exists(o_planet), o_planet, noone);
+target = ternary(instance_exists(o_player), o_player, noone);
 min_distance = target.size * 4 + 60;
 max_distance = min_distance * 2;
 distance = min_distance;
